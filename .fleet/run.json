@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "android-app",
+            "name": "Android-app configuration",
+            "module": "RecipeApp.composeApp.main",
+            "destination": "Xiaomi M2102J20SG",
+        },
+        {
+            "name": "iosApp",
+            "type": "xcode-app",
+            "workingDir": "$PROJECT_DIR$",
+            "buildTarget": {
+                "project": "iosApp",
+                "target": "iosApp"
+            },
+            "configuration": "Debug",
+            "destination": "iPhone 14 | iOS 16.2"
+        }
+        
+    ]
+}
