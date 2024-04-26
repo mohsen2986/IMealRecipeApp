@@ -30,8 +30,8 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
-            implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.androidx.activity.compose)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
@@ -48,8 +48,8 @@ kotlin {
             implementation(libs.ktor.content)
             implementation(libs.ktor.serialization.kotlinx.json)
 
-            implementation(libs.moko.mvvm.core)
-            implementation(libs.moko.mvvm.compose)
+//            implementation(libs.moko.mvvm.core)
+//            implementation(libs.moko.mvvm.compose)
             implementation(libs.kamel)
 
             implementation(libs.voyager)
@@ -65,9 +65,9 @@ android {
     namespace = "org.mohsen.recipeapp"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
-    sourceSets {
-        getByName("main").java.srcDirs("build/generated/moko/androidMain/src")
-    }
+//    sourceSets {
+//        getByName("main").java.srcDirs("build/generated/moko/androidMain/src")
+//    }
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")

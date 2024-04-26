@@ -46,6 +46,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.kodein.rememberScreenModel
@@ -78,11 +79,19 @@ class MainScreen : Screen {
                     ),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Image(
-                    modifier = Modifier.padding(top = 13.dp),
-                    painter = painterResource("images/splash_logo.png"),
-                    contentDescription = null
-                )
+                Box {
+//                    Image(
+//                        modifier = Modifier.fillMaxSize() ,
+//                        painter = painterResource("images/clouds.png"),
+//                        contentScale = ContentScale.FillWidth,
+//                        contentDescription = null
+//                    )
+                    Image(
+                        modifier = Modifier.padding(top = 13.dp),
+                        painter = painterResource("images/splash_logo.png"),
+                        contentDescription = null
+                    )
+                }
                 OutlinedTextField(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -163,7 +172,7 @@ class MainScreen : Screen {
                                         color = Color(0xff353842),
                                     )
                                     .clickable {
-                                        navigator.push(MealDetailScreen(it.idMeal))
+                                        navigator.push(MealDetailScreen(it))
                                     }
                                     .clip(RoundedCornerShape(20.dp)),
                             ) {
@@ -183,12 +192,15 @@ class MainScreen : Screen {
                                 )
 
                                 Text(
-                                    modifier = Modifier.padding(top = 19.dp)
+                                    modifier = Modifier.fillMaxWidth()
+                                        .padding(vertical = 19.dp, horizontal = 15.dp)
                                         .align(Alignment.CenterHorizontally),
-                                    text = it.area + " " + it.category,
+                                    text = it.strInstructions,
                                     style = TextStyle(
-                                        color = Color.White
-                                    )
+                                        color = Color.White ,
+                                    ) ,
+                                    maxLines = 2 ,
+                                    overflow = TextOverflow.Ellipsis
                                 )
                             }
                         }
@@ -206,13 +218,14 @@ class MainScreen : Screen {
                     viewModel.getRecipe()
                 },
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color(0xffCC8B28) ,
+                    backgroundColor = Color(0xffCC8B28),
                 )
             ) {
                 Text(
-                    text = "Search" ,
+                    text = "Search",
                     style = TextStyle(
-                        color = Color.White
+                        color = Color.White ,
+//                        fontFamily = typography().body2.fontFamily
                     )
                 )
             }

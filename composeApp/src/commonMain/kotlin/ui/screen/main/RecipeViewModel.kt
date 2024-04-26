@@ -4,7 +4,6 @@ import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import data.KtorClient
 import data.model.Meals
-import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -45,14 +44,24 @@ class RecipeViewModel: ScreenModel{
                     searchResult = SearchResult.Loading
                 )
             }
-            val callback = KtorClient.client.get("https://www.themealdb.com/api/json/v1/1/search.php?s=${_uiState.value.query}")
-            val response: Meals  = callback.body()
+            try {
+                val callback = KtorClient.client.get("https://www.themealdb.com/api/json/v1/1/search.php?s=${_uiState.value.query}")
+                val response: Meals  = callback.body()
 
-            _uiState.update {
-                it.copy(
-                    searchResult = SearchResult.Success(response)
-                )
+                _uiState.update {
+                    it.copy(
+                        searchResult = SearchResult.Success(response)
+                    )
+                }
+            }catch (e: Exception){
+                println(e)
+                _uiState.update {
+                    it.copy(
+                        searchResult = SearchResult.Error
+                    )
+                }
             }
+
         }
     }
 } 
